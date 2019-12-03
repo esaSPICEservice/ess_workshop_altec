@@ -17,8 +17,8 @@ To interact during the workshop join the
 [OpenPlanetary forum](https://forum.openplanetary.org/t/spice-workshop-workshop-on-solar-system-geometry-with-spice/185)
 
 ## Webex Links
-* **[Tuesday](https://altecspace.webex.com/altecspace-en/j.php?MTID=me59f94b9302151ec50c60e6c4acf03ea))
-* **[Wednesday](https://altecspace.webex.com/altecspace-en/j.php?MTID=mfe9b24b08aaddfb7bad36e04f317ee07))
+* [Tuesday](https://altecspace.webex.com/altecspace-en/j.php?MTID=me59f94b9302151ec50c60e6c4acf03ea)
+* [Wednesday](https://altecspace.webex.com/altecspace-en/j.php?MTID=mfe9b24b08aaddfb7bad36e04f317ee07)
 
 ## Workshop Agenda
 
