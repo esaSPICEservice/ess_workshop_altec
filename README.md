@@ -16,11 +16,15 @@ on SPICE please visit the
 To interact during the workshop join the  
 [OpenPlanetary forum](https://forum.openplanetary.org/t/spice-workshop-workshop-on-solar-system-geometry-with-spice/185)
 
+## Webex Links
+* **[Tuesday](https://altecspace.webex.com/altecspace-en/j.php?MTID=me59f94b9302151ec50c60e6c4acf03ea))
+* **[Wednesday](https://altecspace.webex.com/altecspace-en/j.php?MTID=mfe9b24b08aaddfb7bad36e04f317ee07))
+
 ## Workshop Agenda
 
 The agenda for the workshop will be:
 
-Tuesday (3rd Dec)
+**Tuesday (3rd Dec)
 * 09:00–09:30 Setup and Introduction to SPICE
 * 09:30 – 11:00 SPICE fundamentals (I)
 * 11:15 – 13:30 SPICE fundamentals (II)
@@ -29,7 +33,7 @@ Tuesday (3rd Dec)
 * 16:15 – 18:00 SPICE for ExoMarsRSP (II): The ExoMarsRSP SPICE Kernel Dataset (continued)
     Hands-on SPICE (II): Rover Communications Tutorial
 
-Wednesday (4th Dec)
+**Wednesday (4th Dec)
 * 09:00 – 11:00 SPICE for ExoMarsRSP (III): The ExoMarsRSP PDS4 Bundle
     Hands-on SPICE (III): Rover Operations Tutorial
 * 11:15 – 13:30 SPICE pipelines: NAIF Utilities,  Auxiliary Data Conversion System 
