@@ -1,0 +1,215 @@
+KPL/IK
+
+PanCam Instrument kernel
+===============================================================================
+
+   This instrument kernel (I-kernel) contains Rover Module Panoramic Camera
+   (PANCAM) optics, detector, and field-of-view parameters.
+
+
+Version and Date
+-------------------------------------------------------------------------------
+
+   Version 0.0.1 -- February 6, 2019 -- Marc Costa Sitja, ESA/ESAC
+
+      Updated RM IDs from -999XXX to -174XXX.
+
+   Version 0.0.0 -- June 8, 2018 -- Marc Costa Sitja, ESA/ESAC
+
+      Preliminary Version.
+
+
+References
+-------------------------------------------------------------------------------
+
+   1. RM Frames Definition Kernel (FK), latest version
+      
+   2. ''Kernel Pool Required Reading''
+
+   3. ``The PanCam Instrument for the ExoMars Rover'', A.J. Coates et al,
+      ASTROBIOLOGY, Volume 17, Numbers 6 and 7, 2017,
+      DOI:10.1089/ast.2016.1548
+
+
+Contact Information
+-------------------------------------------------------------------------------
+
+   If you have any questions regarding this file contact SPICE support at
+   ESA:
+
+           Marc Costa Sitja
+           (+34) 91-8131-457
+           mcosta@sciops.esa.int, esa_spice@sciops.esa.int
+
+   or ROCC at Altec Space:
+
+           Federico Salvioli
+           +1 (818) 354-8136
+           federico.salvioli@altecspace.it
+
+
+Implementation Notes
+-------------------------------------------------------------------------------
+
+   Applications that need SPICE I-kernel data must ``load'' the I-kernel file,
+   normally during program initialization. The SPICE routine FURNSH loads a
+   kernel file into the pool as shown below.
+
+      CALL FURNSH ( 'frame_kernel_name' )    -- FORTRAN
+      furnsh_c ( "frame_kernel_name" );      -- C
+      cspice_furnsh, frame_kernel_name       -- IDL
+      cspice_furnsh( 'frame_kernel_name' )   -- MATLAB
+      spiceypy.furnsh( 'frame_kernel_name' ) -- PYTHON
+
+   Loading the kernel using the SPICELIB routine FURNSH causes the data
+   items and their associated values present in the kernel to become
+   associated with a data structure called the ``kernel pool''.
+
+   Once the file has been loaded, the SPICE routine GETFOV (getfov_c in
+   C, cspice_getfov in IDL and MATLAB) can be used to retrieve FOV
+   parameters for a given instrument or structure.
+
+   The application program may obtain the value(s) for any other IK data
+   item using the SPICELIB routines GDPOOL, GIPOOL, GCPOOL (gdpool_c, gipool_c,
+   gcpool_c in C, cspice_gdpool, cspice_gipool, cspice_gcpool in IDL and
+   MATLAB). See [1] for details.
+
+   This file was created with, and can be updated with a text editor or
+   word processor.
+
+
+Naming Conventions and Conventions for Specifying Data
+-------------------------------------------------------------------------------
+
+   Data items are specified using ``keyword=value'' assignments [1].
+   All keywords referencing values in this I-kernel start with the
+   characters `INS' followed by the NAIF RM instrument ID code.
+   The PanCam instrument IDs are defined in [1] as follows:
+
+               Instrument name          ID
+               --------------------     -------
+               RM_PANCAM_WAC_L          -174110
+               RM_PANCAM_WAC_R          -174120
+               RM_PANCAM_HRC            -174130
+
+
+   The remainder of the keyword is an underscore character followed by
+   the unique name of the data item. For example, the boresight of
+   the PanCam Left Wide Angle Camera (PANCAM_WAC_L) is specified by
+
+               INS-174110_BORESIGHT
+
+   The upper bound on the length of all keywords is 32 characters.
+
+   If a keyword is included in more than one file, or if the same
+   keyword appears more than once within a single file, the last
+   assignment supersedes any earlier assignments.
+
+
+Overview
+-------------------------------------------------------------------------------
+      
+   TBD.
+
+
+Apparent FOV Layout
+---------------------------------------------------------------------------
+
+   This section provides a diagram illustrating the PANCAM_WAC_L and
+   PANCAM_WAC_R detectors apparent FOVs layout in the corresponding reference
+   frames.
+
+   The NAVCAM surface slit creates a rectangular field of view with half cone
+   angle of 32.5 degrees. The following diagrams illustrate the above field of
+   view in the instrument frame:
+
+                 Y                                 X
+                  ins                               ins
+                ^     /                           ^     /
+                |    /                            |    /
+                |   /                             |   /
+                |  /                              |  /
+           X    | /    o                     Y    | /    o
+            ins |/ 19.15                      ins |/ 19.15
+                x-------->                        o-------->
+                |\         Z                      |\         Z
+                | \         ins                   | \         ins
+                |  \                              |  \
+                |   \                             |   \
+                |    \                            |    \
+                |     \                           |     \
+                              Plane X = 0                       Plane Y = 0
+
+
+   Please note that the FOV reference and cross angles are defined with half
+   angle values.
+
+
+Mounting Alignment
+-------------------------------------------------------------------------------
+
+   Refer to the latest version of the RM Frames Definition Kernel
+   (FK) [1] for the PanCam reference frames definitions and
+   mounting alignment information.
+
+
+Optical Parameters
+---------------------------------------------------------------------------
+
+   TBD.
+
+
+CCD Parameters
+---------------------------------------------------------------------------
+
+   TBD.
+
+
+FOV Definitions
+-------------------------------------------------------------------------------
+
+   This section contains definitions for the PanCam FOVs. These definitions
+   are provided in the format required by the SPICE (CSPICE) function GETFOV
+   (getfov_c).
+ 
+   Please note that the FOV reference and cross angles are defined with half
+   angle values. The FoV definition corresponds to the NAIF Body Names:
+   RM_PANCAM_WAC_L, RM_PANCAM_WAC_R and RM_PANCAM_HRC.
+
+
+      \begindata
+
+         INS-174110_NAME                      = 'RM_PANCAM_WAC_L'
+         INS-174110_BORESIGHT                 = ( 0.000  0.0000  1.000 )
+         INS-174110_FOV_FRAME                 = 'RM_PANCAM_WAC_L'
+         INS-174110_FOV_SHAPE                 = 'RECTANGLE'
+         INS-174110_FOV_CLASS_SPEC            = 'ANGLES'
+         INS-174110_FOV_REF_VECTOR            = ( 1.000  0.000   0.0000 )
+         INS-174110_FOV_REF_ANGLE             = ( 19.15 )
+         INS-174110_FOV_CROSS_ANGLE           = ( 19.15 )
+         INS-174110_FOV_ANGLE_UNITS           = 'DEGREES'
+
+         INS-174120_NAME                      = 'RM_PANCAM_WAC_R'
+         INS-174120_BORESIGHT                 = ( 0.000  0.0000  1.000 )
+         INS-174120_FOV_FRAME                 = 'RM_PANCAM_WAC_R'
+         INS-174120_FOV_SHAPE                 = 'RECTANGLE'
+         INS-174120_FOV_CLASS_SPEC            = 'ANGLES'
+         INS-174120_FOV_REF_VECTOR            = ( 1.000  0.000   0.0000 )
+         INS-174120_FOV_REF_ANGLE             = ( 19.15 )
+         INS-174120_FOV_CROSS_ANGLE           = ( 19.15 )
+         INS-174120_FOV_ANGLE_UNITS           = 'DEGREES'
+
+         INS-174130_NAME                      = 'RM_PANCAM_HRC'
+         INS-174130_BORESIGHT                 = ( 0.000  0.0000  1.000 )
+         INS-174130_FOV_FRAME                 = 'RM_PANCAM_HRC'
+         INS-174130_FOV_SHAPE                 = 'RECTANGLE'
+         INS-174130_FOV_CLASS_SPEC            = 'ANGLES'
+         INS-174130_FOV_REF_VECTOR            = ( 1.000  0.000   0.0000 )
+         INS-174130_FOV_REF_ANGLE             = (  2.44 )
+         INS-174130_FOV_CROSS_ANGLE           = (  2.44 )
+         INS-174130_FOV_ANGLE_UNITS           = 'DEGREES'
+         
+      \begintext
+
+
+End of IK file.

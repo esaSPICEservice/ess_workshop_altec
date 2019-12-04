@@ -1,0 +1,131 @@
+KPL/SCLK
+
+SP SCLK File -- TEST DATA -- FICTIONAL
+===========================================================================
+
+   This file is a SPICE spacecraft clock (SCLK) kernel containing
+   information required for ExoMars RSP Surface Platform Module (SP) 
+   on-board clock to UTC conversion.
+   
+   This file contains the data necessary for converting from ET to
+   ticks for the FICTIONAL SP spacecraft clock (clock ID code 173)
+   
+   This is intended for study purposes or for those situations in which
+   a clock is not available for the structure whose orientation will be
+   modelled by a C-kernel.
+     
+
+Production/History of this SCLK file
+--------------------------------------------------------
+
+   This file has been created by Stanislav Bober (IKI) based on 
+   Exomars Rover fictional SCLK kernel "emrsp_rm_fict_20190208.tsc"
+   and contains FICTIONAL DATA. 
+   It is intended ONLY for study purposes. 
+   NO DATA ANALYSIS SHALL BE PERFOMED BASED ON THIS FILE.  
+   
+   This SCLK kernel is intended to be used with test CK files with
+   structure IDs listed below on board the rover -173 (SP):
+
+      SP_LANDER             -173000
+      
+
+Usage
+--------------------------------------------------------
+
+   This file must be loaded into the user's program by a call to the
+   FURNSH subroutine
+
+          CALL FURNSH ( 'this_file_name; )    -- FORTRAN
+          furnsh_c ( "this_file_name" );      -- C
+          cspice_furnsh, 'this_file_name'     -- IDL
+          cspice_furnsh( 'this_file_name' )   -- MATLAB
+          spiceypy.furnsh( 'this_file_name' ) -- PYTHON
+
+   in order to use the SPICELIB SCLK family of subroutines to convert
+   SP_LANDER spacecraft on-board clock to ET and vice versa.
+
+
+SCLK Format
+--------------------------------------------------------
+
+   The on-board clock, the conversion for which is provided by this SCLK
+   file, consists of two fields:
+
+          SSSSSSSSSS.FFFFF
+
+   where:
+
+          SSSSSSSSSS -- count of on-board seconds
+
+          FFFFF      -- count of fractions of a second with one fraction
+                        being 1/65536 of a second; normally this field value
+                        is within 0..65535 range.
+
+
+References
+--------------------------------------------------------
+
+   1.   SCLK Required Reading Document
+   
+   2.   TIME Required Reading Document
+   
+   3.   KERNEL Pool Required Reading Document
+   
+
+Inquiries
+--------------------------------------------------------
+
+   If you have any questions regarding this file contact SPICE support at
+   ESAC:
+
+           Marc Costa Sitja
+           (+34) 91-8131-457
+           mcosta@sciops.esa.int, esa_spice@sciops.esa.int
+
+     or SPICE support at IKI:
+
+             Alexander Abbakumov
+             +7 (495) 333-40-13
+             aabbakumov@romance.iki.rssi.ru
+
+             Stanislav Bober
+             +7 (985) 285-24-94
+             stasbober@rlab.iki.rssi.ru
+
+           
+Kernel DATA
+--------------------------------------------------------
+
+   This SCLK file is constructed so that the valid SCLK strings are
+   simply the number of TDB seconds that have passed since the Ephemeris
+   epoch 2019-OCT-31-00:00:00.000. Thus 1/288929292.8201 simply
+   represents the epoch that occurs 288929292.8201 TDB seconds past the
+   ET epoch 2019-OCT-31-00:00:00.000.
+ 
+   For all time, the clock runs at the same rate as TDB. There is only
+   one partition for this clock.
+
+  \begindata
+
+        SCLK_KERNEL_ID           = ( @2019-10-31 )
+
+        SCLK_DATA_TYPE_173        = ( 1 )
+        SCLK01_TIME_SYSTEM_173    = ( 1 )
+        SCLK01_N_FIELDS_173       = ( 2 )
+        SCLK01_MODULI_173         = ( 4294967296 65536 )
+        SCLK01_OFFSETS_173        = ( 0 0 )
+        SCLK01_OUTPUT_DELIM_173   = ( 1 )
+
+        SCLK_PARTITION_START_173  = ( 0 )
+
+        SCLK_PARTITION_END_173    = ( 2.81474976710656E14 )
+
+        SCLK01_COEFFICIENTS_173   = (
+ 
+              0.0000000000000E+00     @2019-OCT-31-00:00:00.000         1 )
+
+  \begintext
+  
+
+End of SCLK file.

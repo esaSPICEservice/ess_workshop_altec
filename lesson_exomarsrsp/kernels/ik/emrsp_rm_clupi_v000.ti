@@ -1,0 +1,283 @@
+KPL/IK
+
+CLUPI Instrument kernel
+===============================================================================
+
+   This instrument kernel (I-kernel) contains Rover Module Close-Up Imager
+   (CLUPI) optics, detector, and field-of-view parameters.
+
+
+Version and Date
+-------------------------------------------------------------------------------
+
+    Version 0.0.0 -- February 14, 2019 -- Marc Costa Sitja, ESA/ESAC
+
+      Preliminary Version.
+
+
+References
+-------------------------------------------------------------------------------
+
+   1. RM Frames Definition Kernel (FK), latest version
+
+   2. ''Kernel Pool Required Reading''
+
+   3. ``ExoMars/CLUPI Science Requirements Specification Document'',
+       EXM.CL.RSD.SPX.1501, Space Exploration Institute,
+       Issue 1, Rev. 0, July 2015
+
+
+Contact Information
+-------------------------------------------------------------------------------
+
+   If you have any questions regarding this file contact SPICE support at
+   ESA:
+
+           Marc Costa Sitja
+           (+34) 91-8131-457
+           mcosta@sciops.esa.int, esa_spice@sciops.esa.int
+
+   or ROCC at Altec Space:
+
+           Federico Salvioli
+           +1 (818) 354-8136
+           federico.salvioli@altecspace.it
+
+
+Implementation Notes
+-------------------------------------------------------------------------------
+
+   Applications that need SPICE I-kernel data must ``load'' the I-kernel file,
+   normally during program initialization. The SPICE routine FURNSH loads a
+   kernel file into the pool as shown below.
+
+      CALL FURNSH ( 'frame_kernel_name' )    -- FORTRAN
+      furnsh_c ( "frame_kernel_name" );      -- C
+      cspice_furnsh, frame_kernel_name       -- IDL
+      cspice_furnsh( 'frame_kernel_name' )   -- MATLAB
+      spiceypy.furnsh( 'frame_kernel_name' ) -- PYTHON
+
+   Loading the kernel using the SPICELIB routine FURNSH causes the data
+   items and their associated values present in the kernel to become
+   associated with a data structure called the ``kernel pool''.
+
+   Once the file has been loaded, the SPICE routine GETFOV (getfov_c in
+   C, cspice_getfov in IDL and MATLAB) can be used to retrieve FOV
+   parameters for a given instrument or structure.
+
+   The application program may obtain the value(s) for any other IK data
+   item using the SPICELIB routines GDPOOL, GIPOOL, GCPOOL (gdpool_c, gipool_c,
+   gcpool_c in C, cspice_gdpool, cspice_gipool, cspice_gcpool in IDL and
+   MATLAB). See [1] for details.
+
+   This file was created with, and can be updated with a text editor or
+   word processor.
+
+
+Naming Conventions and Conventions for Specifying Data
+-------------------------------------------------------------------------------
+
+   Data items are specified using ``keyword=value'' assignments [1].
+   All keywords referencing values in this I-kernel start with the
+   characters `INS' followed by the NAIF RM instrument ID code.
+   The Star Tracker instrument IDs are defined in [1] as follows:
+
+               Instrument name          ID
+               --------------------     -------
+               RM_CLUPI_FOV1            -174601
+               RM_CLUPI_FOV2            -174602
+               RM_CLUPI_FOV3            -174603
+
+
+   The remainder of the keyword is an underscore character followed by
+   the unique name of the data item. For example, the boresight of
+   the CLUPI FOV1 (RM_CLUPI_FOV1) is specified by
+
+               INS-174601_BORESIGHT
+
+   The upper bound on the length of all keywords is 32 characters.
+
+   If a keyword is included in more than one file, or if the same
+   keyword appears more than once within a single file, the last
+   assignment supersedes any earlier assignments.
+
+
+Overview
+-------------------------------------------------------------------------------
+
+   TBD.
+
+
+Apparent FOV Layout
+---------------------------------------------------------------------------
+
+   This section provides a diagram illustrating the LOCCAM_L and LOCCAM_R
+   detectors apparent FOVs layout in the corresponding reference frames.
+
+   The characteristics of the imaged surface with CLUPI using the FOV1 are
+   presented in the following table with various working distances:
+
+        Working        Viewed area        Resolution   Depth of
+        Distance   (2652 x 1768 pixels)   per pixel     field
+      -----------------------------------------------------------
+         10 cm       1.9 cm x 1.3 cm      7 pm/pixel    0.12 cm
+         50 cm      10.4 cm x 7.0 cm     39 pm/pixel     1.6 cm
+         100 cm     20.9 cm x 13.9 cm    79 pm/pixel     5.9 cm
+         111 cm     23.2 cm x 15.4 cm    87 μm/pixel     7.1 cm
+
+   This results into different half angle values, the following are used:
+   5.96 degrees and 3.97 degrees.
+
+   CLUPI FOV1 represents the full slit of CLUPI:
+
+                                      ^ +Yfov1
+                                      |  (+Xbracket)
+                                      |
+       ---              +-------------|-------------+
+        ^               |             |             |
+        | 7.9 deg       |             |             |
+        |               |             |             |
+        |               |             |             |
+        |         1768  |             o----------------> +Xfov1
+        |         lines |           +Zbracket       |     (+Ybracket)
+        |               |                           |
+        |               |                           |
+        V               |                           |
+       ---      Pixel (0,0)-------------------------+
+                              2652 pixels/line
+
+                        |          11.8 deg         |   Boresight (+Z axis)
+                        |<------------------------->|   is out of the page
+                        |                           |
+
+
+   CLUPI's FOV2 is defined as a crop of FOV2, which results into half angle
+   values of 5.96 degrees and 2.52 degrees:
+
+                                      ^ +Yfov2
+                                      |
+                                      |
+       ---              +-------------|-------------+
+        ^               |             |             |
+        | 5.04 deg      |             |             |
+        |               |             o---------------->  +Xfov2
+        |               |                           |
+        |         1128  |             o +Zopt       |
+        V         lines +---------------------------+
+       ---   Pixel (0,0)|                           |
+
+                        |                           |
+                        +- - - - - - - - - - - - - -+
+                              2652 pixels/line
+
+                        |          11.8 deg         |   Boresight (+Z axis)
+                        |<------------------------->|   is out of the page
+                        |                           |
+
+   CLUPI's FOV2 is defined as a crop of FOV3, which results into half angle
+   values of 5.96 degrees and 1.43 degrees:
+
+                        +- - - - - - - - - - - - - -+
+                        |            ^ +Xfov3       |
+                                     |
+                        |            |              |
+                                     |
+                   640  |            o +Zdrilltip   |
+       ---        lines +------------|--------------+
+        ^               |            |              |
+        | 2.86 deg      |            o---------------->  +Yfov3
+        V               |                           |
+       ---       Pixel (0,0)------------------------+
+                              2652 pixels/line
+
+                        |          11.8 deg         |   Boresight (+Z axis)
+                        |<------------------------->|   is out ofinto the page
+                        |                           |
+
+
+   Please note that the FOV reference and cross angles are defined with half
+   angle values.
+
+
+Mounting Alignment
+-------------------------------------------------------------------------------
+
+   Refer to the latest version of the RM Frames Definition Kernel
+   (FK) [1] for the CLUPI reference frames definitions and
+   mounting alignment information.
+
+   Please note that the boresights of FOV2 and FOV3 are implemented by
+   using the center of the FOVs and therefore do not correspond to
+   the +Z axis of their reference frames. The following Python code
+   snippet illustrates how the boresight is computed for RM_CLUPI_FOV2:
+
+      #!/usr/bin/env python3
+
+      import math
+      import spiceypy
+
+      spiceypy.unorm([math.tan(math.radians(3.97-2.52)),0,1])
+
+      >> (array([0.02530457, 0.        , 0.99967979]), 1.0003203145403574)
+
+
+Optical Parameters
+---------------------------------------------------------------------------
+
+   TBD.
+
+
+CCD Parameters
+---------------------------------------------------------------------------
+
+   TBD.
+
+
+FOV Definitions
+-------------------------------------------------------------------------------
+
+   This section contains definitions for the CLUPI FOVs. These definitions
+   are provided in the format required by the SPICE (CSPICE) function GETFOV
+   (getfov_c).
+
+   Please note that the FOV reference and cross angles are defined with half
+   angle values. The FoV definition corresponds to the NAIF Body Name:
+   RM_CLUPI_FOV1, RM_CLUPI_FOV2 and RM_CLUPI_FOV3.
+
+
+      \begindata
+
+         INS-174601_NAME                      = 'RM_CLUPI_FOV1'
+         INS-174601_BORESIGHT                 = ( 0.000  0.0000  1.000 )
+         INS-174601_FOV_FRAME                 = 'RM_CLUPI_BRACKET'
+         INS-174601_FOV_SHAPE                 = 'RECTANGLE'
+         INS-174601_FOV_CLASS_SPEC            = 'ANGLES'
+         INS-174601_FOV_REF_VECTOR            = ( 1.000  0.000   0.0000 )
+         INS-174601_FOV_REF_ANGLE             = ( 5.96 )
+         INS-174601_FOV_CROSS_ANGLE           = ( 3.97 )
+         INS-174601_FOV_ANGLE_UNITS           = 'DEGREES'
+
+         INS-174602_NAME                      = 'RM_CLUPI_FOV2'
+         INS-174602_BORESIGHT                 = ( 0.02530457, 0.0, 0.99967979 )
+         INS-174602_FOV_FRAME                 = 'RM_CLUPI_OPT_AXIS'
+         INS-174602_FOV_SHAPE                 = 'RECTANGLE'
+         INS-174602_FOV_CLASS_SPEC            = 'ANGLES'
+         INS-174602_FOV_REF_VECTOR            = ( 1.000  0.000   0.0000 )
+         INS-174602_FOV_REF_ANGLE             = ( 5.96 )
+         INS-174602_FOV_CROSS_ANGLE           = ( 2.52 )
+         INS-174602_FOV_ANGLE_UNITS           = 'DEGREES'
+
+         INS-174603_NAME                      = 'RM_CLUPI_FOV3'
+         INS-174603_BORESIGHT                 = ( -0.0348995, 0.0, 0.99939083 )
+         INS-174603_FOV_FRAME                 = 'RM_CLUPI_DRILL_TIP'
+         INS-174603_FOV_SHAPE                 = 'RECTANGLE'
+         INS-174603_FOV_CLASS_SPEC            = 'ANGLES'
+         INS-174603_FOV_REF_VECTOR            = ( 1.000  0.000   0.0000 )
+         INS-174603_FOV_REF_ANGLE             = ( 5.96 )
+         INS-174603_FOV_CROSS_ANGLE           = ( 1.43 )
+         INS-174603_FOV_ANGLE_UNITS           = 'DEGREES'
+
+      \begintext
+
+
+End of IK file.

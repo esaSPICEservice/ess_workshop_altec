@@ -25,7 +25,7 @@ To interact during the workshop join the
 The agenda for the workshop will be (UPDATED):
 
 **Tuesday (3rd Dec)**
-* 09:00–09:30 Setup and Introduction to SPICE
+* 09:00 – 09:30 Setup and Introduction to SPICE
 * 09:30 – 11:00 SPICE fundamentals (I)
 * 11:15 – 13:30 SPICE fundamentals (II)
 * 14:30 – 16:00 Hands-on SPICE (I): Remote Sensing Observation Tutorial
@@ -33,12 +33,11 @@ The agenda for the workshop will be (UPDATED):
 
 **Wednesday (4th Dec)**
 * 09:00 - 09:30 SPICE for ExoMarsRSP (I):  SPICE implementation for ROCC, The ExoMarsRSP SPICE Kernel Dataset
-* 09:30 – 11:00 SPICE for ExoMarsRSP (II): The ExoMarsRSP SPICE Kernel Dataset 
-* 11:15 – 12:00 Hands-on SPICE (II): Rover Communications Tutorial with WebGeocalc
-* 12:00 – 13:00 Hands-on SPICE (III): Rover Operations Tutorial
-* 14:30 – 16:00 Hands-on SPICE (IV): Rover Operations Tutorial, creating kernels
-* 16:15 – 18:00 Wrap-up: Open Discussion, Q/A, 
-    AOBs (Cosmographia, WebGeocalc, Unity)
+* 09:30 – 10:30 SPICE for ExoMarsRSP (II): The ExoMarsRSP SPICE Kernel Dataset 
+* 10:30 – 11:00 Hands-on SPICE (II): Rover Communications Tutorial with WebGeocalc
+* 11:50 – 13:00 Hands-on SPICE (III): Rover Operations Tutorial: Scenario Analysis
+* 14:30 – 16:00 Hands-on SPICE (IV): Rover Operations Tutorial: Creating kernels
+* 16:15 – 18:00 Wrap-up: Open Discussion, Q/A, AOBs
 
 ## Repository Content
 
@@ -49,6 +48,9 @@ This repository contains the following files:
     * NAIF Documentation for the lesson
     * SPICE Kernels for the lesson
     * Two Jupyter Notebooks: the original one and the working one of the workshop.
+* ExoMarsRSP Lesson Directory
+    * Jupyter Notebooks with the proposed lessons
+    * SPICE Kernels for the lesson
 
 ## Getting SPICE
 
