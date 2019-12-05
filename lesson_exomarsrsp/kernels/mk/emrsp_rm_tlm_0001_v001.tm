@@ -53,7 +53,7 @@ Implementation Notes
 
    \begindata
 
-     PATH_VALUES       = ( '/Users/mcosta/SPICE/ExoMarsRSP/kernels' )
+     PATH_VALUES       = ( '/Users/mcosta/ess_workshop_altec/lesson_exomarsrsp/kernels' )
 
      PATH_SYMBOLS      = ( 'KERNELS' )
 
